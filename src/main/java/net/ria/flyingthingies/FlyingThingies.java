@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.ria.flyingthingies.entities.ModEntityTypes;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -20,10 +21,9 @@ public class FlyingThingies
     public FlyingThingies()
     {
         // Test
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        modEventBus.addListener(this::commonSetup);
-
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(this::commonSetup);
+        ModEntityTypes.ENTITIES.register(bus);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
